@@ -7,6 +7,7 @@ import Rentals from "./components/rentals";
 import NavBar from "./components/navbar";
 import NotFound from "./components/common/notFound";
 import MovieDetail from "./components/movieDetail";
+import MovieAdd from "./components/movieAdd";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/register" component={RegisterForm} />
           <Route path="/customers" component={Customers} />
           <Route path="/rentals" component={Rentals} />
+          <Route path="/movies/new" component={MovieAdd} />
           <Route path="/movies/:id" component={MovieDetail} />
           <Route path="/movies" component={Movies} />
           <Route path="/not-found" component={NotFound} />

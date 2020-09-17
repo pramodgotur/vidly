@@ -86,6 +86,9 @@ class Movies extends Component {
         <div className="col-md-8">
           <div className="mt-5 mb-5">
             <p>Showing {filteredCount} movies in the database</p>
+            <button className="btn btn-primary">
+              New Movie
+            </button>
             <MoviesTable
               movies={movies}
               sortColumn={sortColumn}

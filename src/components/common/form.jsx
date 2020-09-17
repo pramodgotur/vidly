@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
+import SelectBox from "./selectBox"
 
 class Form extends Component {
   state = {
@@ -64,6 +65,16 @@ class Form extends Component {
       />
     );
   };
+
+  renderSelectBox = (name, label, options) => {
+    return (
+      <SelectBox
+        name={name}
+        label={label}
+        options={options}
+      />
+    )
+  }
 }
 
 export default Form;
