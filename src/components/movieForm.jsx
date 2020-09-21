@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Form from "./common/form"
 import Joi from "joi-browser"
-
+import * as GenreAPI from "../services/fakeGenreService"
+import { saveMovie } from "../services/fakeMovieService"
 
 class MovieForm extends Form {
     state = {
@@ -19,11 +20,19 @@ class MovieForm extends Form {
         numberInStock: Joi.number().required().min(0).max(100).label("Number in Stock"),
         dailyRentalRate: Joi.number().required().min(0).max(10).label("Daily Rental Rate")
     }
+    doSubmit = () => {
+        let { data: movie } = this.state
+        let genreId = GenreAPI.genres.find(g => g.name === movie.genre)
+        movie.genreId = genreId._id
+        saveMovie(movie)
+        this.props.history.push("/movies")
+    }
     render() {
         let options = [
-            { value: "action", label: "Action" },
-            { value: "comedy", label: "Comedy" },
-            { value: "thriller", label: "Thriller" }
+            { value: "", label: "Select Genre" },
+            { value: "Action", label: "Action" },
+            { value: "Comedy", label: "Comedy" },
+            { value: "Thriller", label: "Thriller" }
         ]
         return (
             <form onSubmit={this.handleSubmit}>

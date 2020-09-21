@@ -7,6 +7,7 @@ import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
 import _ from "lodash";
 // import { array } from "prop-types";
+import { Link } from "react-router-dom"
 
 class Movies extends Component {
   state = {
@@ -50,6 +51,11 @@ class Movies extends Component {
     this.setState({ sortColumn });
   };
 
+  handleSubmit = () => {
+    console.log("here...");
+
+  }
+
   getPagedData = () => {
     const { pageSize, currentPage, movies: allMovies, selectedGenre, sortColumn } = this.state;
     const filtered =
@@ -86,9 +92,9 @@ class Movies extends Component {
         <div className="col-md-8">
           <div className="mt-5 mb-5">
             <p>Showing {filteredCount} movies in the database</p>
-            <button className="btn btn-primary">
+            <Link to="/movies/new" className="mb-5 btn btn-primary">
               New Movie
-            </button>
+            </Link>
             <MoviesTable
               movies={movies}
               sortColumn={sortColumn}
@@ -104,7 +110,7 @@ class Movies extends Component {
             />
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 }

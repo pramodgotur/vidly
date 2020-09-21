@@ -1,19 +1,19 @@
 import React from 'react';
 
-const SelectBox = ({ name, label, options }) => {
+const SelectBox = ({ name, label, value, options, onChange, error }) => {
     return (
         <div className="form-group">
             <label htmlFor={name}>{label}</label>
-            <select name={name} id={name} className="form-control">
-                <option value="">Select {label}</option>
+            <select value={value} name={name} id={name} onChange={onChange} className="form-control">
                 {options.map(
                     option => {
                         return (
-                            <option value={option.value}>{option.label}</option>
+                            <option key={option.value} value={option.value}>{option.label}</option>
                         )
                     }
                 )}
             </select>
+            {error && <p className="text-danger">{error}</p>}
         </div>
     );
 }

@@ -7,7 +7,7 @@ class MovieAdd extends Component {
         return (
             <React.Fragment>
                 <h2>Add new Movie</h2>
-                <MovieForm />
+                <MovieForm {...this.props} />
             </React.Fragment>
         );
     }

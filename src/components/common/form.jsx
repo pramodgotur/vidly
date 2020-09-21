@@ -67,11 +67,15 @@ class Form extends Component {
   };
 
   renderSelectBox = (name, label, options) => {
+    const { data, errors } = this.state
     return (
       <SelectBox
         name={name}
         label={label}
+        value={data[name]}
         options={options}
+        onChange={this.handleChange}
+        errors={errors[name]}
       />
     )
   }
