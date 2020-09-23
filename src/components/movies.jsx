@@ -51,11 +51,6 @@ class Movies extends Component {
     this.setState({ sortColumn });
   };
 
-  handleSubmit = () => {
-    console.log("here...");
-
-  }
-
   getPagedData = () => {
     const { pageSize, currentPage, movies: allMovies, selectedGenre, sortColumn } = this.state;
     const filtered =

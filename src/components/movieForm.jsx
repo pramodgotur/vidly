@@ -7,6 +7,7 @@ import { saveMovie } from "../services/fakeMovieService"
 class MovieForm extends Form {
     state = {
         data: {
+            _id: "",
             title: "",
             genre: "",
             numberInStock: "",
@@ -14,7 +15,22 @@ class MovieForm extends Form {
         },
         errors: {}
     }
+    componentDidMount() {
+        let { movie } = this.props
+        if (movie != undefined) {
+            let data = {
+                _id: movie._id,
+                title: movie.title,
+                genre: movie.genre.name,
+                numberInStock: movie.numberInStock,
+                dailyRentalRate: movie.dailyRentalRate,
+            }
+            this.setState({ data: data })
+        }
+        console.log(this.state);
+    }
     schema = {
+        _id: Joi.string().allow(""),
         title: Joi.string().required().label("Title"),
         genre: Joi.string().required().label("Genre"),
         numberInStock: Joi.number().required().min(0).max(100).label("Number in Stock"),
