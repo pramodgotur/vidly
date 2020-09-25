@@ -8,7 +8,7 @@ const SelectBox = ({ name, label, value, options, onChange, error }) => {
                 {options.map(
                     option => {
                         return (
-                            <option key={option.value} value={option.value}>{option.label}</option>
+                            <option key={option._id} value={option._id}>{option.name}</option>
                         )
                     }
                 )}
