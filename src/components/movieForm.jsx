@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Form from "./common/form"
 import Joi from "joi-browser"
-import * as GenreAPI from "../services/fakeGenreService"
+import { getGenres } from "../services/genreService";
 import { saveMovie } from "../services/fakeMovieService"
+import { getMovie } from "../services/movieService"
 
 class MovieForm extends Form {
     state = {
@@ -16,8 +17,11 @@ class MovieForm extends Form {
         genres: [],
         errors: {}
     }
-    componentDidMount() {
-        let { movie } = this.props
+    async componentDidMount() {
+        let { data: movie } = await getMovie(this.props.match.params.id)
+        if (movie === undefined || !movie) {
+            this.props.history.push("/not-found")
+        }
         if (movie != undefined) {
             let data = {
                 _id: movie._id,
@@ -28,7 +32,7 @@ class MovieForm extends Form {
             }
             this.setState({ data: data })
         }
-        let genres = GenreAPI.getGenres()
+        let { data: genres } = await getGenres()
         this.setState({ genres })
     }
     schema = {
