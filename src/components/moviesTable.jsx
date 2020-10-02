@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Like from "./common/like";
 import Table from "./common/table";
 import { Link } from "react-router-dom";
+import auth from "../services/authService"
 
 class MoviesTable extends Component {
   columns = [
@@ -22,18 +23,28 @@ class MoviesTable extends Component {
         <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />
       ),
     },
-    {
-      key: "delete",
-      content: (movie) => (
-        <button
-          className="btn btn-danger btn-sm"
-          onClick={() => this.props.onDelete(movie._id)}
-        >
-          Delete
-        </button>
-      ),
-    },
   ];
+
+  deleteColumn = {
+    key: "delete",
+    content: (movie) => (
+      <button
+        className="btn btn-danger btn-sm"
+        onClick={() => this.props.onDelete(movie._id)}
+      >
+        Delete
+      </button>
+    ),
+  }
+
+  constructor() {
+    super()
+    const user = auth.getCurrentUser()
+    if (user && user.isAdmin) {
+      this.columns.push(this.deleteColumn)
+    }
+  }
+
   render() {
     const { movies, onSort, sortColumn } = this.props;
     return (

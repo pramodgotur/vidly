@@ -5,6 +5,8 @@ import config from "./config.json"
 
 const apiUrl = config.apiEndpoint + "auth"
 
+http.setJwt(getJwt());
+
 export async function login(email, password) {
     const { data: jwt } = await http.post(apiUrl, { email, password })
     localStorage.setItem("token", jwt)
@@ -28,6 +30,10 @@ export function getCurrentUser() {
     }
 }
 
+export function getJwt() {
+    return localStorage.getItem("token")
+}
+
 export default {
-    login, logout, getCurrentUser, loginWithJWT
+    login, logout, getCurrentUser, loginWithJWT, getJwt
 }

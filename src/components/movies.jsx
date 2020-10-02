@@ -81,7 +81,7 @@ class Movies extends Component {
     const { length: count } = this.state.movies;
     const { pageSize, currentPage, sortColumn } = this.state;
     const { totalCount: filteredCount, data: movies } = this.getPagedData();
-
+    const { user } = this.props
     if (count === 0) {
       return (
         <div className="mt-5 mb-5">
@@ -101,9 +101,9 @@ class Movies extends Component {
         <div className="col-md-8">
           <div className="mt-5 mb-5">
             <p>Showing {filteredCount} movies in the database</p>
-            <Link to="/movies/new" className="mb-5 btn btn-primary">
+            {user && <Link to="/movies/new" className="mb-5 btn btn-primary">
               New Movie
-            </Link>
+            </Link>}
             <MoviesTable
               movies={movies}
               sortColumn={sortColumn}
