@@ -5,6 +5,7 @@ const SelectBox = ({ name, label, value, options, onChange, error }) => {
         <div className="form-group">
             <label htmlFor={name}>{label}</label>
             <select value={value} name={name} id={name} onChange={onChange} className="form-control">
+                <option value="">Select {label}</option>
                 {options.map(
                     option => {
                         return (
